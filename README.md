@@ -4,7 +4,7 @@
 
 IKFast Plugin, Yolov3 & SSD Real-time Object Detection, Lidar & Visual SLAM.
 
-Tested in Ubuntu 18.04 ROS Melodic
+Tested in Ubuntu 18.04 ROS Melodic. If you use ROS Kinetic, modify *$robotiq_gazebo/src/mimic_joint_plugin.cpp* to suit Gazebo 7
 
 
 ## Installation
