@@ -4,21 +4,28 @@
 
 IKFast Plugin, Yolov3 & SSD Real-time Object Detection, Lidar & Visual SLAM.
 
-Tested in Kinetic and Melodic
+Tested in Ubuntu 18.04 ROS Melodic
 
 
 ## Installation
 
+Install the ROS controllers
+```bash
+sudo apt-get install ros*controller*
+```
+Install dependencies
+```bash
+sudo apt install ros-melodic-pointcloud-to-laserscan ros-melodic-rosbridge-server
+sudo apt-get install ros-melodic-robot-localization
+sudo apt-get install ros-melodic-interactive-marker-twist-server
+sudo apt-get install ros-melodicy-ar-track-alvar
+```
 Go to your workspace/src
 ```bash
 git clone https://github.com/zimougao/chargingbot.git
 cd ..
 catkin_make
 source devel/setup.bash
-```
-Install the ROS controllers
-```bash
-sudo apt-get install ros*controller*
 ```
 
 ## Modify model path to your workspace
