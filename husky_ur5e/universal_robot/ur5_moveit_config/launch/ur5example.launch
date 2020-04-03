@@ -1,0 +1,31 @@
+<launch>
+  
+    <!-- Launch Gazebo  -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+
+#    <!-- ros_control arm launch file -->
+#    <include file="$(find ur5_moveit_config)/launch/probot_anno_gazebo_world.launch" /> 
+
+    <!-- Given the published joint states, publish tf for the robot links -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+      <param name="/use_gui" value="false"/> 
+      <rosparam param="/source_list">[/move_group/fake_controller_joint_states]</rosparam>
+    </node>
+  
+#
+
+    <!-- Run Rviz and load the default config to see the state of the move_group node -->
+    <include file="$(find ur5_moveit_config)/launch/moveit_rviz.launch">
+      <arg name="config" value="true"/>
+      <arg name="debug" value="$(arg debug)"/>
+    </include>
+
+#    <!-- ros_control trajectory control dof arm launch file -->
+ #   <include file="$(find probot_gazebo)/launch/probot_anno/probot_anno_trajectory_controller.launch" />
+
+#    <!-- moveit launch file -->
+#    <include file="$(find probot_anno_moveit_config)/launch/moveit_planning_execution.launch" />
+
+</launch>
