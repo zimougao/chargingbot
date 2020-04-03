@@ -3,6 +3,7 @@
 **Husky + UR5e + Robotiq 85 Gripper in Simulation**
 
 IKFast Plugin, Yolov3 & SSD Real-time Object Detection, Lidar & Visual SLAM.
+
 Tested in Kinetic and Melodic
 
 
