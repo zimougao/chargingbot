@@ -1,0 +1,14 @@
+install ros controller
+sudo apt-get install ros*controller*
+
+
+
+download each files of the husky_ur5e into src file and catkin_make
+
+open gazebo
+$roslaunch husky_ur5_world husky_empty_world.launch
+
+open moveit
+$roslaunch ur5ehuskyg_moveit demo.launch
+
+all set!

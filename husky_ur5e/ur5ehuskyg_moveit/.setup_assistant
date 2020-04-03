@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: husky_description
+    relative_path: urdf/husky.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/husky.srdf
+  CONFIG:
+    author_name: bingkunzhao
+    author_email: bingkunzhao28@gmail.com
+    generated_timestamp: 1585329060

@@ -1,0 +1,18 @@
+controller_list:
+  - name: trajectory_controller
+    action_ns: "follow_joint_trajectory"
+    type: FollowJointTrajectory
+    joints: 
+      - ur_arm_shoulder_pan_joint
+      - ur_arm_shoulder_lift_joint
+      - ur_arm_elbow_joint
+      - ur_arm_wrist_1_joint
+      - ur_arm_wrist_2_joint
+      - ur_arm_wrist_3_joint
+  - name: gripper_controller
+    action_ns: gripper_cmd
+    type: GripperCommand
+    command_joint: robotiq_85_left_knuckle_joint
+    joints: 
+      - robotiq_85_left_knuckle_joint
+

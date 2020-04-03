@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<library path="lib/libhuksy_ur5e_gripper_manipulator_moveit_ikfast_plugin">
+  <class base_class_type="kinematics::KinematicsBase" name="huksy_ur5e_gripper_manipulator/IKFastKinematicsPlugin" type="huksy_ur5e_gripper_manipulator::IKFastKinematicsPlugin">
+    <description>IKFast61 plugin for closed-form kinematics of huksy_ur5e_gripper manipulator</description>
+  </class>
+</library>
