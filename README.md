@@ -16,22 +16,25 @@ sudo apt-get install ros*controller*
 
 ## Modify model path to your workspace
 
-Go to your workspace/src
+Change 2 lines of <uri> paths in station.world:
+
 ```bash
-git clone https://github.com/zimougao/chargingbot.git
-cd ..
+$ roscd husky_ur5_world/worlds/
+$ gedit station.world
 ```
+replace "<uri>/home/mou/ws_myrobot/src/husky_ur5e/husky_ur5_world/meshes/station.dae</uri>"
+to "<uri>**your path to husky_ur5_world pkg**/meshes/station.dae</uri>"
 
 ## Starting Gazebo Simulation
 
-The simulation is launched by:
+Open a new terminal. The simulation is launched by:
 ```bash
 $ roslaunch husky_ur5_world husky_artrack_world.launch
 ```
 
 ## Starting MoveIt control
 
-Launch the MoveIt control by:
+Open a new terminal. Launch the MoveIt control by:
 ```bash
 $ roslaunch ur5ehuskyg_moveit demo.launch
 ```
@@ -39,6 +42,17 @@ You now should see the same posture in the Gazebo as the MoveIt environment.
 Set in Rviz the `MotionPlanning/Planning Request/Planning Group` to manipulator to drag the arm around. 
 By `Plan and Execute` the arm will move to its new position.
 
+## Control Husky to trace ar track
+
+Open a new terminal. Launch the QR code detector by:
+```bash
+$ roslaunch husky_ur5_world husky.launch
+```
+Open a new terminal. Launch the tracker by:
+```bash
+$ rosrun husky_ur5_world carrot.py
+```
+You now should see the Husky tracing the QR code
 
 ## Control your ur5 with robotiq gripper85
 
@@ -47,3 +61,4 @@ The simulation is launched by:
 ```bash
 $ rosrun pick_test pick_test_scripts_pick_up_demo.py
 ```
+
