@@ -22,7 +22,8 @@ Change 2 lines of <uri> paths in station.world:
 $ roscd husky_ur5_world/worlds/
 $ gedit station.world
 ```
-replace "<uri>/home/mou/ws_myrobot/src/husky_ur5e/husky_ur5_world/meshes/station.dae</uri>"
+Replace "<uri>/home/mou/ws_myrobot/src/husky_ur5e/husky_ur5_world/meshes/station.dae</uri>"
+
 to "<uri>**your path to husky_ur5_world pkg**/meshes/station.dae</uri>"
 
 ## Starting Gazebo Simulation
