@@ -51,7 +51,7 @@
   </xacro:robotiq_85_gripper> 
 
 
-  <xacro:kinect_camera_01 prefix="camera_01_" parent="ur_arm_ee_link"
+  <xacro:kinect_camera_01 prefix="camera_01" parent="ur_arm_ee_link"
      robot_namespace_01="/"/>
 
   <!-- Gazebo FT sensor plugin -->
