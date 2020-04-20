@@ -70,10 +70,20 @@ $ rosrun husky_ur5_world carrot.py
 You now should see the Husky tracing the QR code
 
 ## Control your ur5 with robotiq gripper85
-
+before control the arm, please shut off the carrot.py after the robot reach the point.
 You can send commands to the joints or to the gripper.
-The simulation is launched by:
+The robot needs several steps to gripe the gun.
+first, let the robot arm be prepere
 ```bash
-$ rosrun pick_test pick_test_scripts_pick_up_demo.py
+$ rosrun pick_test pick_up_prepere.py
+```
+then, shutoff the husky.launch and use the camera on robot arm to detect the tag
+```bash
+$ roslaunch husky_ur5_world manipulator.launch
 ```
 
+step three, move the gripper to right position.
+```bash
+$ rosrun pick_test cartisan_ur5.py
+```
+step four, gripper and go.
