@@ -71,8 +71,10 @@ You now should see the Husky tracing the QR code
 
 ## Control your ur5 with robotiq gripper85
 before control the arm, please shut off the carrot.py after the robot reach the point.
+
 You can send commands to the joints or to the gripper.
 The robot needs several steps to gripe the gun.
+
 step one, let the robot arm be prepere
 ```bash
 $ rosrun pick_test pick_up_prepere.py
