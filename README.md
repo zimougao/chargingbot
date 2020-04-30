@@ -18,7 +18,7 @@ Install dependencies
 sudo apt install ros-melodic-pointcloud-to-laserscan ros-melodic-rosbridge-server
 sudo apt-get install ros-melodic-robot-localization
 sudo apt-get install ros-melodic-interactive-marker-twist-server
-sudo apt-get install ros-melodicy-ar-track-alvar
+sudo apt-get install ros-melodic-ar-track-alvar
 ```
 Go to your workspace/src
 ```bash
