@@ -27,17 +27,20 @@ cd chargingbot
 git clone https://github.com/JenniferBuehler/gazebo-pkgs
 sudo apt-get install ros-melodic-object-recognition-msgs
 git clone https://github.com/JenniferBuehler/general-message-pkgs.git
-cd ..
-cd ..
+cd ../..
 catkin_make
 source devel/setup.bash
 ```
 
-## download the urdf file frome Google Drive
-the file is under 
-Charging robot metrials / Team files / Bingkun / parking_lot / car_with_port
+## Download the urdf file frome Google Drive
+Visit Google Drive: https://drive.google.com/drive/u/0/folders/1XtgpTrNwrcQiswtwLbZn0oNSMuTtQXNs
+Go to File: Charging robot materials / Team files / Bingkun / parking_lot / car_with_port
 
-download the car_with_port files and move all meshes and png files in car_with_port/meshes into husky_ur5_world/meshes
+Download meshes file.
+```bash
+$ cd your_workspace/src/chargingbot/husky_ur5e/husky_ur5_world/
+```
+Replace meshes file with the new one.
 
 ## Modify model path to your workspace
 
