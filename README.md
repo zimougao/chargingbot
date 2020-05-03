@@ -37,7 +37,7 @@ Visit Google Drive: https://drive.google.com/drive/u/0/folders/1XtgpTrNwrcQiswtw
 Go to File: Charging robot materials / Team files / Bingkun / parking_lot / car_with_port
 Download **meshes** file.
 ```bash
-$ cd your_workspace/src/chargingbot/husky_ur5e/husky_ur5_world/
+$ roscd husky_ur5_world/
 ```
 Replace **meshes** file with the new one.
 
