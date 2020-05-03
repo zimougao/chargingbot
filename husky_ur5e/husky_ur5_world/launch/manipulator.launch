@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-    <arg name="marker_size_01" default="0.3" />
+    <arg name="marker_size_01" default="3" />
     <arg name="max_new_marker_error_01" default="0.08" />
     <arg name="max_track_error_01" default="0.2" />
     <arg name="cam_image_topic_01" default="/camera_01/rgb/image_raw" />
