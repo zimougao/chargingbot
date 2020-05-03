@@ -23,23 +23,40 @@ sudo apt-get install ros-melodic-ar-track-alvar
 Go to your workspace/src
 ```bash
 git clone https://github.com/zimougao/chargingbot.git
+cd chargingbot
+git clone https://github.com/JenniferBuehler/gazebo-pkgs
+sudo apt-get install ros-melodic-object-recognition-msgs
+git clone https://github.com/JenniferBuehler/general-message-pkgs.git
+cd ..
 cd ..
 catkin_make
 source devel/setup.bash
 ```
 
+## download the urdf file frome Google Drive
+the file is under 
+Charging robot metrials / Team files / Bingkun / parking_lot / car_with_port
+
+download the car_with_port files and move all meshes and png files in car_with_port/meshes into husky_ur5_world/meshes
+
 ## Modify model path to your workspace
 
-Change 2 lines of <uri> paths in station.world:
+Change 2 lines of <uri> paths in test_05.world:
 
 ```bash
 $ roscd husky_ur5_world/worlds/
 $ gedit station.world
 ```
-Replace "<uri>/home/mou/ws_myrobot/src/husky_ur5e/husky_ur5_world/meshes/station.dae</uri>"
+Replace "<uri>/home/zbk/catkin_ws/src/car_with_port/meshes/station01.dae</uri>"
+"<uri>/home/zbk/catkin_ws/src/car_with_port/meshes/EVcharger.dae</uri>"
+"<uri>/home/zbk/catkin_ws/src/car_with_port/meshes/parkinglot.dae</uri>"
+"<uri>/home/zbk/catkin_ws/src/car_with_port/meshes/Mercedes_AMG.dae</uri>"
 
-to "<uri>**your path to husky_ur5_world pkg**/meshes/station.dae</uri>"
-
+to "<uri>**your path to husky_ur5_world pkg**/meshes/station01.dae</uri>"
+   "<uri>**your path to husky_ur5_world pkg**/meshes/EVcharger.dae</uri>"
+   "<uri>**your path to husky_ur5_world pkg**/meshes/parkinglot.dae</uri>"
+   "<uri>**your path to husky_ur5_world pkg**/meshes/Mercedes_AMG.dae</uri>"
+   
 ## Starting Gazebo Simulation
 
 Open a new terminal. The simulation is launched by:
