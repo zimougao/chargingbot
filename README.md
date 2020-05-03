@@ -47,7 +47,7 @@ Change 2 lines of <uri> paths in test_05.world:
 
 ```bash
 $ roscd husky_ur5_world/worlds/
-$ gedit station.world
+$ gedit test_05.world
 ```
 Replace "<uri>/home/zbk/catkin_ws/src/car_with_port/meshes/station01.dae</uri>"
 
