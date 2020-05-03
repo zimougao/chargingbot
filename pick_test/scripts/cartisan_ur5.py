@@ -61,7 +61,7 @@ class MoveItCartesianDemo:
         arm.set_pose_reference_frame('base_link')
                 
         # 设置位置(单位：米)和姿态（单位：弧度）的允许误差
-        arm.set_goal_position_tolerance(0.1)
+        arm.set_goal_position_tolerance(0.2)
         arm.set_goal_orientation_tolerance(0.1)
         
         # 设置允许的最大速度和加速度
@@ -82,9 +82,10 @@ class MoveItCartesianDemo:
 
         print(start_pose) 
 
-
         # 初始化路点列表
         waypoints = []
+
+        os.system("rosrun ur5_gazebo send_gripper.py --value 0.0")
 
         # 将初始位姿加入路点列表
 #        arm.set_named_target('test5')
@@ -106,25 +107,68 @@ class MoveItCartesianDemo:
         wpose = deepcopy(start_pose)
         print carrot
 
+
         wpose.position.z -= carrot.z
         waypoints.append(deepcopy(wpose))
 
 
 
-
-        wpose.position.x += carrot.x
-        waypoints.append(deepcopy(wpose))
-
-
-
 #        wpose.position.z -= carrot.z+0.1
-#        wpose.position.y -= carrot.y
+#        wpose.position.y += carrot.y
+#       waypoints.append(deepcopy(wpose))
 
 
-#        waypoints.append(deepcopy(wpose))
 
 
+        fraction = 0.0   #路径规划覆盖率
+	maxtries = 100   #最大尝试规划次数
+	attempts = 0     #已经尝试规划次数
+		
+	# 设置机器臂当前的状态作为运动初始状态
+	arm.set_start_state_to_current_state()
+	 
+	# 尝试规划一条笛卡尔空间下的路径，依次通过所有路点
+	while fraction < 1.0 and attempts < maxtries:
+	    (plan, fraction) = arm.compute_cartesian_path (
+		                    waypoints,   # waypoint poses，路点列表
+		                    0.01,        # eef_step，终端步进值
+		                    0.0,         # jump_threshold，跳跃阈值
+		                    True)        # avoid_collisions，避障规划
+		    
+            # 尝试次数累加
+	    attempts += 1
+		    
+	    # 打印运动规划进程
+	    if attempts % 10 == 0:
+	        rospy.loginfo("Still trying after " + str(attempts) + " attempts...")
+		             
+        # 如果路径规划成功（覆盖率100%）,则开始控制机械臂运动
+	if fraction == 1.0:
+	    rospy.loginfo("Path computed successfully. Moving the arm.")
+	    arm.execute(plan)
+            rospy.loginfo("Path execution complete.")
+        # 如果路径规划失败，则打印失败信息
+	else:
+	    rospy.loginfo("Path planning failed with only " + str(fraction) + " success after "   + str(maxtries) + " attempts.")  
 
+	rospy.sleep(1)
+
+        if fraction < 1.0:
+            moveit_commander.roscpp_shutdown()
+            moveit_commander.os._exit(0)
+
+
+        # 控制机械臂先回到初始化位置
+        waypoints = [] 
+
+        test_pose = arm.get_current_pose(end_effector_link).pose
+
+
+        wpose = deepcopy(test_pose)
+
+
+        wpose.position.x -= carrot.x + 0.03
+        waypoints.append(deepcopy(wpose))
 
         fraction = 0.0   #路径规划覆盖率
 	maxtries = 100   #最大尝试规划次数
@@ -159,7 +203,63 @@ class MoveItCartesianDemo:
 
 	rospy.sleep(1)
 
-        # 控制机械臂先回到初始化位置
+        if fraction < 1.0:
+            moveit_commander.roscpp_shutdown()
+            moveit_commander.os._exit(0)
+
+
+        ########
+        os.system("rosrun ur5_gazebo send_gripper.py --value 0.8")
+
+        ########
+        waypoints = [] 
+
+        pick_pose = arm.get_current_pose(end_effector_link).pose
+
+
+        wpose = deepcopy(pick_pose)
+
+
+        wpose.position.z += 0.1
+        waypoints.append(deepcopy(wpose))
+
+        fraction = 0.0   #路径规划覆盖率
+	maxtries = 100   #最大尝试规划次数
+	attempts = 0     #已经尝试规划次数
+		
+	# 设置机器臂当前的状态作为运动初始状态
+	arm.set_start_state_to_current_state()
+	 
+	# 尝试规划一条笛卡尔空间下的路径，依次通过所有路点
+	while fraction < 1.0 and attempts < maxtries:
+	    (plan, fraction) = arm.compute_cartesian_path (
+		                    waypoints,   # waypoint poses，路点列表
+		                    0.02,        # eef_step，终端步进值
+		                    0.0,         # jump_threshold，跳跃阈值
+		                    True)        # avoid_collisions，避障规划
+		    
+            # 尝试次数累加
+	    attempts += 1
+		    
+	    # 打印运动规划进程
+	    if attempts % 10 == 0:
+	        rospy.loginfo("Still trying after " + str(attempts) + " attempts...")
+		             
+        # 如果路径规划成功（覆盖率100%）,则开始控制机械臂运动
+	if fraction == 1.0:
+	    rospy.loginfo("Path computed successfully. Moving the arm.")
+	    arm.execute(plan)
+            rospy.loginfo("Path execution complete.")
+        # 如果路径规划失败，则打印失败信息
+	else:
+	    rospy.loginfo("Path planning failed with only " + str(fraction) + " success after "   + str(maxtries) + " attempts.")  
+
+	rospy.sleep(1)
+
+        if fraction < 1.0:
+            moveit_commander.roscpp_shutdown()
+            moveit_commander.os._exit(0)
+
 
         # 关闭并退出moveit
         moveit_commander.roscpp_shutdown()
