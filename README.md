@@ -48,14 +48,20 @@ $ roscd husky_ur5_world/worlds/
 $ gedit station.world
 ```
 Replace "<uri>/home/zbk/catkin_ws/src/car_with_port/meshes/station01.dae</uri>"
+
 "<uri>/home/zbk/catkin_ws/src/car_with_port/meshes/EVcharger.dae</uri>"
+
 "<uri>/home/zbk/catkin_ws/src/car_with_port/meshes/parkinglot.dae</uri>"
+
 "<uri>/home/zbk/catkin_ws/src/car_with_port/meshes/Mercedes_AMG.dae</uri>"
 
 to "<uri>**your path to husky_ur5_world pkg**/meshes/station01.dae</uri>"
-   "<uri>**your path to husky_ur5_world pkg**/meshes/EVcharger.dae</uri>"
-   "<uri>**your path to husky_ur5_world pkg**/meshes/parkinglot.dae</uri>"
-   "<uri>**your path to husky_ur5_world pkg**/meshes/Mercedes_AMG.dae</uri>"
+
+"<uri>**your path to husky_ur5_world pkg**/meshes/EVcharger.dae</uri>"
+
+"<uri>**your path to husky_ur5_world pkg**/meshes/parkinglot.dae</uri>"
+
+"<uri>**your path to husky_ur5_world pkg**/meshes/Mercedes_AMG.dae</uri>"
    
 ## Starting Gazebo Simulation
 
