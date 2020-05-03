@@ -85,7 +85,7 @@ class MoveItCartesianDemo:
         # 初始化路点列表
         waypoints = []
 
-        os.system("rosrun ur5_gazebo send_gripper.py --value 0.0")
+        os.system("rosrun pick_test send_gripper.py --value 0.0")
 
         # 将初始位姿加入路点列表
 #        arm.set_named_target('test5')
@@ -209,7 +209,7 @@ class MoveItCartesianDemo:
 
 
         ########
-        os.system("rosrun ur5_gazebo send_gripper.py --value 0.8")
+        os.system("rosrun pick_test send_gripper.py --value 0.8")
 
         ########
         waypoints = [] 
