@@ -32,7 +32,7 @@ catkin_make
 source devel/setup.bash
 ```
 
-## Download the urdf file frome Google Drive
+## Download the urdf file from Google Drive
 Visit Google Drive: https://drive.google.com/drive/u/0/folders/1XtgpTrNwrcQiswtwLbZn0oNSMuTtQXNs  
 Go to File: Charging robot materials / Team files / Bingkun / parking_lot / car_with_port  
 Download **meshes** file.
