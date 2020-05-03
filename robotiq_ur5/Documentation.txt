@@ -1,0 +1,182 @@
+ur5
+===
+
+[![Build Status](https://travis-ci.org/utecrobotics/ur5.svg?branch=master)](https://travis-ci.org/utecrobotics/ur5)
+
+ROS packages for the UR5 Robot with a Robotiq gripper
+
+## Installation
+
+This will assume that you already have a catkin workspace. Go to the source directory of the workspace
+  ```
+  $ roscd; cd ../src
+  ```
+Clone this and the gripper (robotiq) repositories
+  ```
+  $ git clone https://github.com/utecrobotics/ur5
+  $ git clone https://github.com/utecrobotics/robotiq
+  ```
+Build using catkin_make
+  ```
+  $ cd ..
+  $ catkin_make
+  ```
+
+## Visualization of UR5 in RViz
+
+To visualize the model of the robot with a gripper, launch the following:
+  ```
+  $ roslaunch ur5_description display_with_gripper.launch
+  ```
+You can then use the sliders to change the joint values and the gripper values.
+
+## Simulation in Gazebo
+
+To simulate the robot launch the following:
+  ```
+  $ roslaunch ur5_gazebo ur5_cubes.launch
+  ```
+You should see something similar to the following picture:
+![Image of UR5](ur5_images/ur5_cubes.png)
+
+By default the simulation starts paused. Unpause the simulation. You can then send commands to the
+joints or to the gripper.
+
+The following is an example of an action client to change the gripper configuration. Open a new
+terminal, and then execute:
+  ```
+  $ rosrun ur5_gazebo send_gripper.py --value 0.5
+  ```
+where the value is a float between 0.0 (closed) and 0.8 (open).
+
+An example of sending joints values to the robot can be executed as follows:
+  ```
+  $ rosrun ur5_gazebo send_joints.py
+  ```
+To change the values of the joints, the file `send_joints.py` must be modified.
+
+#################################
+## Connecting Gazebo to Moveit ##
+#################################
+
+
+link: http://www.theconstructsim.com/control-gazebo-simulated-robot-moveit-video-answer/
+
+To setup the connection between Gazebo and moveit launch the following:
+
+	$ roslaunch moveit_setup_assistant setup_assistant.launch
+
+1. Browse: .../src/ur5/ur5_description/urdf/ur5_robotiq85_gripper.urdf.xacro
+2. Self collison: sampling density --> High
+	a. Generate Collission matrix
+3. Virtual Joints
+	a.	name: FixedBase
+			child link: world
+			parent Frame: world
+			type: Fixed
+4. Planning Group
+	a. name: 	Manipulator
+			solver: KDL
+			AddChain: 
+				base: world
+				end: ee_link
+	b. name: robotiq_gripper
+			solver: none
+			AddLinks: All Robotiq links 
+5. Robot pose
+		nothing
+6. EndEffectors
+	a. name gripper
+		end group gripper
+		paren link: ee_link
+		parent group: manipulator
+7. Pasive joings
+	none
+8. Simulation
+	Generate URDF
+		copy, and save in new name: problably have to overwrite the old file (have to check)
+9. ROS CONTROL
+	a. Auto Add FOLLOWJOINTTRAJECTORY controllers
+10. author information
+	name + email
+11. Configuration
+	a. Save under robotarm
+12. 
+	a. Create in ROBOTNAME/config the file controllers.yalm
+	b. ADD Following 
+  c. rostopic list for name and actionns
+
+controller_list:
+  - name: trajectory_controller
+    action_ns: "follow_joint_trajectory"
+    type: FollowJointTrajectory
+    joints: 
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+  - name: gripper_controller
+    action_ns: gripper_cmd
+    type: GripperCommand
+    command_joint: robotiq_85_left_knuckle_joint
+    joints: 
+      - robotiq_85_left_knuckle_joint
+
+13. 
+	a. Create in ROBOTNAME/config the file joint_names.yalm
+	b. ADD
+
+controller_joint_names: 
+  - shoulder_pan_joint
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - robotiq_85_left_knuckle_joint
+
+14. modify ur5_moveit_controller_manager.launch
+	a. ADD
+
+<launch>
+  <rosparam file="$(find ROBOTNAME)/config/controllers.yaml"/>
+  <param name="use_controller_manager" value="false"/>
+  <param name="trajectory_execution/execution_duration_monitoring" value="false"/>
+  <param name="moveit_controller_manager" value="moveit_simple_controller_manager/MoveItSimpleControllerManager"/>
+</launch>
+
+15. Create new launch file ROBOTNAME_planning_execution.launch
+	a. ADD
+<launch>
+
+  <rosparam command="load" file="$(find ROBOTNAME)/config/joint_names.yaml"/>
+
+  <include file="$(find ROBOTNAME)/launch/planning_context.launch" >
+    <arg name="load_robot_description" value="true" />
+  </include>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="/use_gui" value="false"/>
+    <rosparam param="/source_list">[/joint_states]</rosparam>
+  </node>
+
+  <include file="$(find ROBOTNAME)/launch/move_group.launch">
+    <arg name="publish_monitored_planning_scene" value="true" />
+  </include>
+
+  <include file="$(find robotiq_ur5)/launch/moveit_rviz.launch">
+    <arg name="config" value="true"/>
+  </include>
+
+</launch>
+
+16. LAUNCH GAZEBO
+	a.  $ roslaunch ur5_gazebo ur5_setup.launch
+	b. Unpause the simulation
+
+17. Launch Moveit
+	a. $ roslaunch robotiq_ur5 robotiq_ur5_planning_execution.launch
+
+18. Control the moveit with moveit or python. They should now work
