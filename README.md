@@ -41,6 +41,7 @@ $ roscd husky_ur5_world/
 ```
 Replace **meshes** file with the new one.
 
+
 ## Modify model path to your workspace
 
 Change 2 lines of <uri> paths in test_05.world:
@@ -64,6 +65,7 @@ to "<uri>**your path to husky_ur5_world pkg**/meshes/station01.dae</uri>"
 "<uri>**your path to husky_ur5_world pkg**/meshes/parkinglot.dae</uri>"
 
 "<uri>**your path to husky_ur5_world pkg**/meshes/Mercedes_AMG.dae</uri>"
+   
    
 ## Starting Gazebo Simulation
 
