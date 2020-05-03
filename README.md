@@ -23,11 +23,8 @@ sudo apt-get install ros-melodic-ar-track-alvar
 Go to your workspace/src
 ```bash
 git clone https://github.com/zimougao/chargingbot.git
-cd chargingbot
-git clone https://github.com/JenniferBuehler/gazebo-pkgs
 sudo apt-get install ros-melodic-object-recognition-msgs
-git clone https://github.com/JenniferBuehler/general-message-pkgs.git
-cd ../..
+cd ..
 catkin_make
 source devel/setup.bash
 ```
