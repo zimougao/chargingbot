@@ -103,6 +103,10 @@ $ roscd pick_test/scripts
 $ chmod +x pick_up_prepere.py cartisan_ur5.py move_pre_pick.py
 $ rosrun pick_test pick_up_prepere.py
 ```
+
+!!!!!!!!!!!!!!!!attention!!!!!!!
+you need make sure trajectory is working complete. otherwise, you need controll the arm to position test1 using rivz planning section, then relaunch the pick_up_prepere.py 
+
 Step two: Shut off the husky.launch and use the camera on the robot arm to detect the tag
 ```bash
 $ roslaunch husky_ur5_world manipulator.launch
@@ -112,4 +116,4 @@ Step three: Move the gripper to the proper position.
 ```bash
 $ rosrun pick_test cartisan_ur5.py
 ```
-Step four, grap and go.
+in that steps, if controller failed, you need redo whole process again. 
