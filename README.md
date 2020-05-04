@@ -100,7 +100,7 @@ The robot needs several steps to grab the gun.
 Step one: Let the robot arm be prepared
 ```bash
 $ roscd pick_test/scripts
-$ chmod +x pick_up_prepere.py cartisan_ur5.py
+$ chmod +x pick_up_prepere.py cartisan_ur5.py move_pre_pick.py
 $ rosrun pick_test pick_up_prepere.py
 ```
 Step two: Shut off the husky.launch and use the camera on the robot arm to detect the tag
